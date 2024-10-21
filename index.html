@@ -99,3 +99,24 @@
     <script src="script.js"></script>
   </body>
 </html>
+
+<!-- Modal de Login -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Login</h2>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" />
+    <label for="password">Senha:</label>
+    <input type="password" id="password" />
+    <button onclick="login()">Entrar</button>
+    <p id="loginError" style="color: red; display: none">
+      Login ou senha incorretos
+    </p>
+  </div>
+</div>
+
+<!-- Footer com link para contagem de cliques -->
+<footer id="footerSection">
+  <a href="#" onclick="openModal()">Ver contagem de cliques</a>
+</footer>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contagem de Cliques</title>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      table {
+        border-collapse: collapse;
+        width: 50%;
+      }
+      table, th, td {
+        border: 1px solid black;
+      }
+      th, td {
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contagem de Cliques</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Link</th>
+          <th>Cliques</th>
+        </tr>
+      </thead>
+      <tbody id="clickData">
+        <!-- Os dados de cliques serão inseridos aqui -->
+      </tbody>
+    </table>
+
+    <script>
+      // Recuperar contagem de cliques do localStorage
+      const clickCounts = JSON.parse(localStorage.getItem("clickCounts")) || {};
+      
+      // Lista de nomes ou descrições dos links (pode personalizar conforme sua lista de links)
+      const linkNames = [
+        "Instagram",
+        "Kit Lavadora de Copos",
+        "Máquina de cortar cabelo",
+        "Capa Para Colchão",
+        "Portfólio GitHub"
+      ];
+
+      const tableBody = document.getElementById('clickData');
+
+      // Gerar linhas da tabela com base na contagem de cliques
+      linkNames.forEach((linkName, index) => {
+        const count = clickCounts[index] || 0; // Se o link não foi clicado, assume 0
+
+        // Criar uma linha da tabela
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${linkName}</td><td>${count}</td>`;
+
+        // Adicionar a linha na tabela
+        tableBody.appendChild(row);
+      });
+    </script>
+  </body>
+</html>
