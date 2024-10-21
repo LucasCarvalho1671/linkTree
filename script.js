@@ -60,17 +60,17 @@ function closeModal() {
 
 // Função de login
 function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const username = document.getElementById("username").value.toLowerCase()
+  const password = document.getElementById("password").value.toLowerCase()
 
   // Verificar se o login está correto
-  if (username === validUsername && password === validPassword) {
+  if (username === validUsername.toLowerCase() && password === validPassword.toLowerCase()) {
     // Fechar o modal e redirecionar para a página de contagem
-    closeModal();
-    window.location.href = "contagem.html"; // Redireciona para a página de contagem
+    closeModal()
+    window.location.href = "contagem.html" // Redireciona para a página de contagem
   } else {
     // Mostrar mensagem de erro
-    document.getElementById("loginError").style.display = "block";
+    document.getElementById("loginError").style.display = "block"
   }
 }
 
