@@ -59,6 +59,17 @@ window.onclick = function (event) {
   }
 }
 
+
+
+// Função auxiliar para extrair o nome do link a partir do href
+function getLinkName(url) {
+  if (url.includes("instagram")) return "instagram"
+  if (url.includes("github")) return "github"
+  if (url.includes("8Ur1kv6jb1")) return "produto1"
+  if (url.includes("9pMPh3Cm2R")) return "produto2"
+  if (url.includes("4VKxeRFeh4")) return "produto3"
+  return null
+}
 // Função para obter a contagem de cliques do backend
 function getClicks() {
   fetch("https://linktree-wst9.onrender.com/api/clicks")
@@ -66,10 +77,10 @@ function getClicks() {
     .then((data) => {
       document.getElementById("instagramClicks").textContent =
         data.instagram || 0
-      document.getElementById("produto1Clicks").textContent = data.produto1 || 0
-      document.getElementById("produto2Clicks").textContent = data.produto2 || 0
-      document.getElementById("produto3Clicks").textContent = data.produto3 || 0
-      document.getElementById("githubClicks").textContent = data.github || 0
+      document.getElementById("produto1clicks").textContent = data.produto1 || 0
+      document.getElementById("produto2clicks").textContent = data.produto2 || 0
+      document.getElementById("produto3clicks").textContent = data.produto3 || 0
+      document.getElementById("githublicks").textContent = data.github || 0
     })
     .catch((error) => {
       console.error("Erro ao obter os dados de cliques:", error)
