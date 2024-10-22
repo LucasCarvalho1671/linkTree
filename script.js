@@ -19,36 +19,6 @@ function toggleMode() {
 }
 
 
-// Função para obter a contagem de cliques do backend
-function getClicks() {
-  fetch('http://localhost:3000/clicks')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Erro na rede');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      document.getElementById('instagramClicks').textContent = data.instagram;
-      document.getElementById('produto1Clicks').textContent = data.produto1;
-      document.getElementById('produto2Clicks').textContent = data.produto2;
-      document.getElementById('produto3Clicks').textContent = data.produto3;
-      document.getElementById('githubClicks').textContent = data.github;
-    })
-    .catch((error) => {
-      console.error('Erro ao obter os dados de cliques:', error);
-      alert('Não foi possível obter a contagem de cliques. Tente novamente mais tarde.');
-    });
-}
-
-// Atualiza os dados ao carregar a página
-window.onload = () => {
-  getClicks();
-  setInterval(getClicks, 50000); // Atualiza a contagem a cada 5 segundos
-};
-
-
-
 // Dados de login fixos (para um login simples sem backend)
 const validUsername = "admin";
 const validPassword = "1234";
