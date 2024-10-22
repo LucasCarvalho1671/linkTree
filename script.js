@@ -18,30 +18,35 @@ function toggleMode() {
   }
 }
 
-// Função para contar cliques nos links e armazenar no localStorage
-const links = document.querySelectorAll("ul li a");
 
-// Recuperar contagem de cliques do localStorage (se existir)
-let clickCounts = JSON.parse(localStorage.getItem("clickCounts")) || {};
+// Função para obter a contagem de cliques do backend
+function getClicks() {
+  fetch('http://localhost:3000/clicks')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Erro na rede');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      document.getElementById('instagramClicks').textContent = data.instagram;
+      document.getElementById('produto1Clicks').textContent = data.produto1;
+      document.getElementById('produto2Clicks').textContent = data.produto2;
+      document.getElementById('produto3Clicks').textContent = data.produto3;
+      document.getElementById('githubClicks').textContent = data.github;
+    })
+    .catch((error) => {
+      console.error('Erro ao obter os dados de cliques:', error);
+      alert('Não foi possível obter a contagem de cliques. Tente novamente mais tarde.');
+    });
+}
 
-// Inicializar contadores de clique para cada link (se ainda não existir)
-links.forEach((link, index) => {
-  if (!clickCounts[index]) {
-    clickCounts[index] = 0;
-  }
+// Atualiza os dados ao carregar a página
+window.onload = () => {
+  getClicks();
+  setInterval(getClicks, 50000); // Atualiza a contagem a cada 5 segundos
+};
 
-  // Adicionar evento de clique a cada link
-  link.addEventListener("click", () => {
-    // Incrementar o contador
-    clickCounts[index]++;
-
-    // Atualizar o localStorage
-    localStorage.setItem("clickCounts", JSON.stringify(clickCounts));
-
-    // Exibir no console o número de cliques para o link clicado
-    console.log(`Link ${index + 1} foi clicado ${clickCounts[index]} vezes.`);
-  });
-});
 
 
 // Dados de login fixos (para um login simples sem backend)

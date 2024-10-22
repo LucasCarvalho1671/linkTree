@@ -1,74 +1,132 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contagem de Cliques</title>
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem de Cliques</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #4A90E2;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+      max-width: 400px; /* Largura máxima para dispositivos grandes */
+    }
+
+    ul li {
+      font-size: 1.5rem;
+      padding: 15px;
+      margin: 10px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s ease-in-out;
+      position: relative; /* Para o botão de atualizar */
+    }
+
+    ul li:hover {
+      transform: translateY(-3px);
+    }
+
+    ul li span {
+      font-weight: bold;
+      color: #4A90E2;
+    }
+
+    /* Botão de Atualizar */
+    .refresh-button {
+      background-color: #4A90E2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: background-color 0.3s;
+    }
+
+    .refresh-button:hover {
+      background-color: #357ABD;
+    }
+
+    /* Estilos responsivos para dispositivos móveis */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
       }
-      table {
-        border-collapse: collapse;
-        width: 50%;
-      }
-      table, th, td {
-        border: 1px solid black;
-      }
-      th, td {
+
+      ul li {
+        font-size: 1.2rem;
         padding: 10px;
-        text-align: center;
       }
-      th {
-        background-color: #f2f2f2;
-      }
-    </style>
-  </head>
-  <body>
+    }
+  </style>
+</head>
+<body>
+  <div>
     <h1>Contagem de Cliques</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Link</th>
-          <th>Cliques</th>
-        </tr>
-      </thead>
-      <tbody id="clickData">
-        <!-- Os dados de cliques serão inseridos aqui -->
-      </tbody>
-    </table>
+    <ul>
+      <li>Instagram: <span id="instagramClicks">0</span>
+        <button class="refresh-button" onclick="getClicks()">↻</button>
+      </li>
+      <li>Produto 1: <span id="produto1Clicks">0</span></li>
+      <li>Produto 2: <span id="produto2Clicks">0</span></li>
+      <li>Produto 3: <span id="produto3Clicks">0</span></li>
+      <li>GitHub: <span id="githubClicks">0</span></li>
+    </ul>
+  </div>
 
-    <script>
-      // Recuperar contagem de cliques do localStorage
-      const clickCounts = JSON.parse(localStorage.getItem("clickCounts")) || {};
-      
-      // Lista de nomes ou descrições dos links (pode personalizar conforme sua lista de links)
-      const linkNames = [
-        "Instagram",
-        "Kit Lavadora de Copos",
-        "Máquina de cortar cabelo",
-        "Capa Para Colchão",
-        "Portfólio GitHub"
-      ];
+  <script>
+    // Função para obter a contagem de cliques do backend
+    function getClicks() {
+      fetch('http://localhost:3000/clicks')
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('instagramClicks').textContent = data.instagram;
+          document.getElementById('produto1Clicks').textContent = data.produto1;
+          document.getElementById('produto2Clicks').textContent = data.produto2;
+          document.getElementById('produto3Clicks').textContent = data.produto3;
+          document.getElementById('githubClicks').textContent = data.github;
+        })
+        .catch((error) => {
+          console.error('Erro ao obter os dados de cliques:', error);
+        });
+    }
 
-      const tableBody = document.getElementById('clickData');
-
-      // Gerar linhas da tabela com base na contagem de cliques
-      linkNames.forEach((linkName, index) => {
-        const count = clickCounts[index] || 0; // Se o link não foi clicado, assume 0
-
-        // Criar uma linha da tabela
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${linkName}</td><td>${count}</td>`;
-
-        // Adicionar a linha na tabela
-        tableBody.appendChild(row);
-      });
-    </script>
-  </body>
+    // Atualiza os dados ao carregar a página
+    window.onload = getClicks;
+  </script>
+</body>
 </html>
