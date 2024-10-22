@@ -25,7 +25,7 @@ const validPassword = "1234";
 
 // Função para abrir o modal
 function openModal() {
-  document.getElementById("loginModal").style.display = "block";
+  document.getElementById("loginModal").style.display = "flex";
 }
 
 // Função para fechar o modal
@@ -41,8 +41,8 @@ function login() {
   // Verificar se o login está correto
   if (username === validUsername.toLowerCase() && password === validPassword.toLowerCase()) {
     // Fechar o modal e redirecionar para a página de contagem
-    closeModal()
-    window.location.href = "contagem.html" // Redireciona para a página de contagem
+    closeModal();
+    window.open("contagem.html", "_blank")// Redireciona para a página de contagem
   } else {
     // Mostrar mensagem de erro
     document.getElementById("loginError").style.display = "block"
@@ -55,4 +55,9 @@ window.onclick = function(event) {
   if (event.target === modal) {
     closeModal();
   }
+}
+
+window.onload = () => {
+  getClicks()
+  setInterval(getClicks, 5000) // Atualiza a contagem a cada 5 segundos
 }

@@ -1,110 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contagem de Cliques</title>
-    <style>
-      /* Reset básico */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem de Cliques</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #f4f4f9;
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 20px;
-      }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
 
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #4A90E2;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    ul li {
+      font-size: 1.5rem;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    ul li:hover {
+      transform: translateY(-3px);
+    }
+
+    ul li span {
+      font-weight: bold;
+      color: #4A90E2;
+    }
+
+    /* Estilos responsivos para dispositivos móveis */
+    @media (max-width: 600px) {
       h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        text-align: center;
-        color: #4a90e2;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        width: 100%;
-        max-width: 400px; /* Largura máxima para dispositivos grandes */
+        font-size: 2rem;
       }
 
       ul li {
-        font-size: 1.5rem;
-        padding: 15px;
-        margin: 10px 0;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: transform 0.2s ease-in-out;
-        position: relative; /* Para o botão de atualizar */
+        font-size: 1.2rem;
+        padding: 8px;
       }
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Contagem de Cliques</h1>
+    <ul>
+      <li>Instagram: <span id="instagramClicks">0</span></li>
+      <li>Produto 1: <span id="produto1Clicks">0</span></li>
+      <li>Produto 2: <span id="produto2Clicks">0</span></li>
+      <li>Produto 3: <span id="produto3Clicks">0</span></li>
+      <li>GitHub: <span id="githubClicks">0</span></li>
+    </ul>
+  </div>
 
-      ul li:hover {
-        transform: translateY(-3px);
-      }
+  <script>
+    // Função para obter a contagem de cliques do backend
+    function getClicks() {
+      fetch('http://localhost:3000/clicks')
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('instagramClicks').textContent = data.instagram || 0;
+          document.getElementById('produto1Clicks').textContent = data.produto1 || 0;
+          document.getElementById('produto2Clicks').textContent = data.produto2 || 0;
+          document.getElementById('produto3Clicks').textContent = data.produto3 || 0;
+          document.getElementById('githubClicks').textContent = data.github || 0;
+        })
+        .catch((error) => {
+          console.error('Erro ao obter os dados de cliques:', error);
+        });
+    }
 
-      ul li span {
-        font-weight: bold;
-        color: #4a90e2;
-      }
-
-      /* Botão de Atualizar */
-      .refresh-button {
-        background-color: #4a90e2;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px;
-        font-size: 1rem;
-        cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: background-color 0.3s;
-      }
-
-      .refresh-button:hover {
-        background-color: #357abd;
-      }
-
-      /* Estilos responsivos para dispositivos móveis */
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2rem;
-        }
-
-        ul li {
-          font-size: 1.2rem;
-          padding: 10px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <h1>Contagem de Cliques</h1>
-      <ul>
-        <li><button class="refresh-button" onclick="getClicks()">↻</button></li>
-        <li>Instagram: <span id="instagramClicks">0</span></li>
-        <li>Produto 1: <span id="produto1Clicks">0</span></li>
-        <li>Produto 2: <span id="produto2Clicks">0</span></li>
-        <li>Produto 3: <span id="produto3Clicks">0</span></li>
-        <li>GitHub: <span id="githubClicks">0</span></li>
-      </ul>
-    </div>
-  </body>
+    // Atualiza os dados ao carregar a página
+window.onload = () => {
+  getClicks();
+  setInterval(getClicks, 5000); // Atualiza a contagem a cada 5 segundos
+};
+  </script>
+</body>
 </html>
