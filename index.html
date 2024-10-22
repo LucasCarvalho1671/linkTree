@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" class="">
+<html lang="pt-br">
   <head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -8,7 +8,6 @@
       rel="stylesheet"
     />
     <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LinkTree</title>
@@ -29,30 +28,47 @@
           <a
             href="https://www.instagram.com/lucas_fdec?igsh=amN6aDJ4MnBxa2tr&utm_source=qr"
             target="_blank"
+            id="instagramLink"
           >
             <ion-icon name="logo-instagram"></ion-icon>&nbsp;Me siga no
-            Instagram !
+            Instagram!
           </a>
         </li>
         <li>
-          <a href="https://s.shopee.com.br/8Ur1kv6jb1" target="_blank"
-            >&#x1F383; kit 2 Lavadora Lava Copos Automático de Pia</a
+          <a
+            href="https://s.shopee.com.br/8Ur1kv6jb1"
+            target="_blank"
+            id="produto1Link"
           >
+            &#x1F383; kit 2 Lavadora Lava Copos Automático de Pia
+          </a>
         </li>
         <li>
-          <a href="https://s.shopee.com.br/9pMPh3Cm2R" target="_blank"
-            >&#x1F47B; Máquina de cortar cabelo e barba</a
+          <a
+            href="https://s.shopee.com.br/9pMPh3Cm2R"
+            target="_blank"
+            id="produto2Link"
           >
+            &#x1F47B; Máquina de cortar cabelo e barba
+          </a>
         </li>
         <li>
-          <a href="https://s.shopee.com.br/4VKxeRFeh4" target="_blank"
-            >&#x1F9DB; Capa Para Colchão Impermeavel Matelado</a
+          <a
+            href="https://s.shopee.com.br/4VKxeRFeh4"
+            target="_blank"
+            id="produto3Link"
           >
+            &#x1F9DB; Capa Para Colchão Impermeavel Matelado
+          </a>
         </li>
         <li>
-          <a href="https://github.com/LucasCarvalho1671/" target="_blank"
-            ><ion-icon name="logo-github"></ion-icon>&nbsp;Ver meu portifolio</a
+          <a
+            href="https://github.com/LucasCarvalho1671/"
+            target="_blank"
+            id="githubLink"
           >
+            <ion-icon name="logo-github"></ion-icon>&nbsp;Ver meu portfólio
+          </a>
         </li>
       </ul>
       <div id="Social-links">
@@ -66,8 +82,8 @@
           <ion-icon name="logo-instagram"></ion-icon>
         </a>
         <a href="https://youtube.com" target="_blank">
-          <ion-icon name="logo-youtube"></ion-icon
-        ></a>
+          <ion-icon name="logo-youtube"></ion-icon>
+        </a>
         <a
           href="https://linkedin.com/in/lucas-ferreira-de-carvalho-902631aa"
           target="_blank"
@@ -87,6 +103,27 @@
         >
       </footer>
     </div>
+
+    <footer id="footerSection">
+      <a href="#" onclick="openModal()">Login</a>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" />
+        <label for="password">Senha:</label>
+        <input type="password" id="password" />
+        <button onclick="login()">Entrar</button>
+        <p id="loginError" style="color: red; display: none">
+          Login ou senha incorretos
+        </p>
+      </div>
+    </div>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -97,27 +134,35 @@
     ></script>
 
     <script src="script.js"></script>
+    <script>
+      // Adiciona ouvintes de eventos de clique para registrar cliques
+      document.addEventListener("DOMContentLoaded", () => {
+        const clickLinks = [
+          {
+            name: "instagram",
+            element: document.getElementById("instagramLink"),
+          },
+          {
+            name: "produto1",
+            element: document.getElementById("produto1Link"),
+          },
+          {
+            name: "produto2",
+            element: document.getElementById("produto2Link"),
+          },
+          {
+            name: "produto3",
+            element: document.getElementById("produto3Link"),
+          },
+          { name: "github", element: document.getElementById("githubLink") },
+        ]
+
+        clickLinks.forEach((link) => {
+          link.element.addEventListener("click", () => {
+            registerClick(link.name)
+          })
+        })
+      })
+    </script>
   </body>
 </html>
-
-<!-- Footer com link para contagem de cliques -->
-<footer id="footerSection">
-  <a href="#" onclick="openModal()">Login</a>
-</footer>
-
-
-<!-- Modal de Login -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h2>Login</h2>
-    <label for="username">Usuário:</label>
-    <input type="text" id="username" />
-    <label for="password">Senha:</label>
-    <input type="password" id="password" />
-    <button onclick="login()">Entrar</button>
-    <p id="loginError" style="color: red; display: none">
-      Login ou senha incorretos
-    </p>
-  </div>
-</div>
