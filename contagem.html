@@ -87,7 +87,7 @@
     <script>
           // Função para obter a contagem de cliques do backend
           function getClicks() {
-            fetch('https://linktree-wst9.onrender.com')
+            fetch('https://linktree-wst9.onrender.com/api/clicks')
               .then((response) => response.json())
               .then((data) => {
                 document.getElementById('instagramClicks').textContent = data.instagram || 0;
@@ -101,9 +101,10 @@
               });
 
             }
+
               // Função para registrar cliques no backend
       function registerClick(linkName) {
-          fetch('https://linktree-wst9.onrender.com/api/clicks', { // Altere para a URL do Render
+          fetch('https://linktree-wst9.onrender.com/api/click', { // Altere para a URL do Render
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -123,10 +124,29 @@
           });
 
         }
+
+        // Função para adicionar ouvintes de eventos de clique
+        function addClickEventListeners() {
+            const clickLinks = [
+                { name: 'instagram', element: document.getElementById('instagramClicks') },
+                { name: 'produto1', element: document.getElementById('produto1Clicks') },
+                { name: 'produto2', element: document.getElementById('produto2Clicks') },
+                { name: 'produto3', element: document.getElementById('produto3Clicks') },
+                { name: 'github', element: document.getElementById('githubClicks') },
+            ];
+
+            clickLinks.forEach(link => {
+                link.element.parentElement.addEventListener('click', () => {
+                    registerClick(link.name);
+                });
+            });
+        }
+
           // Atualiza os dados ao carregar a página
       window.onload = () => {
         getClicks();
         setInterval(getClicks, 5000); // Atualiza a contagem a cada 5 segundos
+        addClickEventListeners();// Adiciona ouvintes de eventos
       };
     </script>
   </body>
