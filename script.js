@@ -123,8 +123,8 @@ function getLinkName(url) {
 }
 
 // Chamando a função no window.onload para registrar os cliques
-window.onload = () => {
+document.addEventListener("DOMContentLoaded", () => {
   getClicks()
   setInterval(getClicks, 5000) // Atualiza a contagem a cada 5 segundos
   addClickEventListeners() // Adiciona os eventos de clique aos links
-}
+})
