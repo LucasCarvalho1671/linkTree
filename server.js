@@ -20,13 +20,15 @@ const clickRoutes = require("./src/routes/clicks")
 app.use("/api/clicks", clickRoutes);
 
 // Rota para obter contagem de cliques
-app.get("/clicks", (req, res) => {
-  res.json(clickCounts)
+app.get("/api/clicks", (req, res) => {
+  res.json(clickCounts);
 });
 
 // Rota para registrar cliques
-app.post("/click", (req, res) => {
-  const { link } = req.body
+// Rota para registrar cliques
+app.post("/api/click", (req, res) => {
+  const { link } = req.body;
+
   // Incrementar o contador correspondente
   if (clickCounts[link] !== undefined) {
     clickCounts[link]++
@@ -38,5 +40,5 @@ app.post("/click", (req, res) => {
 
 // Inicia o servidor
 app.listen(port, () => {
-  console.log(`Servidor rodando em http://localhost:${port}`);
+  console.log(`Servidor rodando na porta ${port}`);
 });
