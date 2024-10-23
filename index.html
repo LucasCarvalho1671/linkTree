@@ -32,6 +32,7 @@
           >
             <ion-icon name="logo-instagram"></ion-icon>&nbsp;Me siga no
             Instagram!
+            <span id="instagramClicks">0</span> <!-- Adicionado para mostrar a contagem -->
           </a>
         </li>
         <li>
@@ -41,6 +42,7 @@
             id="produto1Link"
           >
             &#x1F383; kit 2 Lavadora Lava Copos Automático de Pia
+            <span id="produto1Clicks">0</span> <!-- Adicionado para mostrar a contagem -->
           </a>
         </li>
         <li>
@@ -50,6 +52,7 @@
             id="produto2Link"
           >
             &#x1F47B; Máquina de cortar cabelo e barba
+            <span id="produto2Clicks">0</span> <!-- Adicionado para mostrar a contagem -->
           </a>
         </li>
         <li>
@@ -59,6 +62,7 @@
             id="produto3Link"
           >
             &#x1F9DB; Capa Para Colchão Impermeavel Matelado
+            <span id="produto3Clicks">0</span> <!-- Adicionado para mostrar a contagem -->
           </a>
         </li>
         <li>
@@ -68,6 +72,7 @@
             id="githubLink"
           >
             <ion-icon name="logo-github"></ion-icon>&nbsp;Ver meu portfólio
+            <span id="githubClicks">0</span> <!-- Adicionado para mostrar a contagem -->
           </a>
         </li>
       </ul>
@@ -155,14 +160,14 @@
             element: document.getElementById("produto3Link"),
           },
           { name: "github", element: document.getElementById("githubLink") },
-        ]
+        ];
 
         clickLinks.forEach((link) => {
           link.element.addEventListener("click", () => {
-            registerClick(link.name)
-          })
-        })
-      })
+            registerClick(link.name);
+          });
+        });
+      });
     </script>
   </body>
 </html>
