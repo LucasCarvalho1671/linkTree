@@ -209,7 +209,7 @@ footer {
 
 /* Estilo para o modal */
 .modal {
-  display: flex; /* Oculto por padrão */
+  display: none; /* Oculto por padrão */
   position: fixed; /* Fixa na tela inteira */
   z-index: 1; /* Colocado sobre outros elementos */
   left: 0;
