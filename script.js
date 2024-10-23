@@ -59,8 +59,6 @@ window.onclick = function (event) {
   }
 }
 
-
-
 // Função auxiliar para extrair o nome do link a partir do href
 function getLinkName(url) {
   if (url.includes("instagram")) return "instagram"
@@ -89,7 +87,7 @@ function getClicks() {
 
 // Função para registrar cliques no backend
 function registerClick(linkName) {
-  fetch("https://linktree-wst9.onrender.com/api/click", {
+  fetch("https://linktree-wst9.onrender.com/api/clicks", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
