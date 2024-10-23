@@ -77,10 +77,10 @@ function getClicks() {
     .then((data) => {
       document.getElementById("instagramClicks").textContent =
         data.instagram || 0
-      document.getElementById("produto1clicks").textContent = data.produto1 || 0
-      document.getElementById("produto2clicks").textContent = data.produto2 || 0
-      document.getElementById("produto3clicks").textContent = data.produto3 || 0
-      document.getElementById("githublicks").textContent = data.github || 0
+      document.getElementById("produto1Clicks").textContent = data.produto1 || 0
+      document.getElementById("produto2Clicks").textContent = data.produto2 || 0
+      document.getElementById("produto3Clicks").textContent = data.produto3 || 0
+      document.getElementById("githubClicks").textContent = data.github || 0
     })
     .catch((error) => {
       console.error("Erro ao obter os dados de cliques:", error)
