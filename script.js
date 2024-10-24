@@ -32,6 +32,26 @@ function closeModal() {
   document.getElementById("loginModal").style.display = "none"
 }
 
+ // Captura o evento de tecla pressionada nos campos de input de usuário e senha
+  document.getElementById("password").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+      // Previne o comportamento padrão de submissão do formulário
+      event.preventDefault();
+      // Chama a função de login
+      login();
+    }
+  });
+
+  document.getElementById("username").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+      // Previne o comportamento padrão de submissão do formulário
+      event.preventDefault();
+      // Foca no campo de senha ao pressionar Enter no campo de usuário
+      document.getElementById("password").focus();
+    }
+  });
+
+
 // Função de login
 function login() {
   const username = document.getElementById("username").value.toLowerCase()
