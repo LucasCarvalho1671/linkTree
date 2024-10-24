@@ -141,13 +141,4 @@ function addClickEventListeners() {
   })
 }
 
-// Função auxiliar para extrair o nome do link a partir do href
-function getLinkName(url) {
-  if (url.includes("instagram")) return "instagram"
-  if (url.includes("github")) return "github"
-  if (url.includes("8Ur1kv6jb1")) return "produto1"
-  if (url.includes("9pMPh3Cm2R")) return "produto2"
-  if (url.includes("4VKxeRFeh4")) return "produto3"
-  return null
-}
 
